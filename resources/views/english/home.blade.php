@@ -65,6 +65,7 @@
                 <tr>
                     <th>Word</th>
                     <th>Example</th>
+                    <th>Meaning in Arabic</th>
                     <th>Action</th>
                 </tr>
             </thead>
