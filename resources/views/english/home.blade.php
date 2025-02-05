@@ -91,7 +91,12 @@
                         @endphp
                         @endforeach
                     </td>
-                    <td>iwfdf</td>
+                    <td>
+                        <form action="" method="POST">
+                            @csrf @method('DELETE')
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
                     @php
                         $i++;
                     @endphp
