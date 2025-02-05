@@ -3,7 +3,10 @@
 use App\Http\Controllers\WordsController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [WordsController::class, 'index']);
+Route::controller(WordsController::class)->group(function(){
+route::get('/','index')->name('word.index');
+route::post('/','store')->name('word.store');
+});
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

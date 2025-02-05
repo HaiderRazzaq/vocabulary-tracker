@@ -35,7 +35,8 @@
         <h2 class="text-center">English Vocabulary Tracker</h2>
         <button class="btn btn-secondary mb-3" onclick="toggleMode()">Toggle Dark/Light Mode</button>
         <div class="card p-4">
-            <form method="POST" action="/save-word">
+            <form method="POST" action="{{route('word.store')}}">
+                @csrf
                 <div class="mb-3 d-flex gap-2">
                     <div>
                         <label for="word1" class="form-label">New Word</label>
