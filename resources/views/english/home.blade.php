@@ -63,14 +63,39 @@
         <table class="table table-striped mt-4">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Word</th>
-                    <th>Example</th>
                     <th>Meaning in Arabic</th>
+                    <th>Example</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody id="words-table">
-                <!-- Data will be populated from backend -->
+                @php
+                    $i = 1;
+                @endphp
+                @foreach ($words as $word)
+                    <td>{{ $i }}</td>
+                    <td><b>
+                        {{ $word->word }}</td>
+                        </b>
+                    <td><b>{{ $word->meaning_arabic }}</b></td>
+                    <td>
+                        @php
+                            $i2 = 1;
+                        @endphp
+                        @foreach ($word->examples as $examples)
+                    <b>{{ $i2 . '- ' . $examples->sentence  }}</b> <br>
+                        @php
+                            $i2++;
+                        @endphp
+                        @endforeach
+                    </td>
+                    <td>iwfdf</td>
+                    @php
+                        $i++;
+                    @endphp
+                @endforeach
             </tbody>
         </table>
     </div>

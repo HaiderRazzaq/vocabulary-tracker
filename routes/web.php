@@ -1,17 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WordsController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('english.home');
-});
-
-
-
-
-
-
+Route::get('/', [WordsController::class, 'index']);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
