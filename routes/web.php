@@ -3,9 +3,10 @@
 use App\Http\Controllers\WordsController;
 use Illuminate\Support\Facades\Route;
 
-Route::controller(WordsController::class)->group(function(){
-route::get('/','index')->name('word.index');
-route::post('/','store')->name('word.store');
+Route::controller(WordsController::class)->group(function () {
+    route::get('/', 'index')->name('word.index');
+    route::post('/', 'store')->name('word.store');
+    route::delete('/word/{id}', 'destroy')->name('word.destroy');
 });
 
 // Route::get('/dashboard', function () {

@@ -34,8 +34,21 @@
     <div class="container mt-5">
         <h2 class="text-center">English Vocabulary Tracker</h2>
         <button class="btn btn-secondary mb-3" onclick="toggleMode()">Toggle Dark/Light Mode</button>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
         <div class="card p-4">
-            <form method="POST" action="{{route('word.store')}}">
+            <form method="POST" action="{{ route('word.store') }}">
                 @csrf
                 <div class="mb-3 d-flex gap-2">
                     <div>
@@ -76,34 +89,36 @@
                     $i = 1;
                 @endphp
                 @foreach ($words as $word)
-                    <td>{{ $i }}</td>
-                    <td><b>
-                        {{ $word->word }}</td>
-                        </b>
-                    <td><b>{{ $word->meaning_arabic }}</b></td>
-                    <td>
-                        @php
-                            $i2 = 1;
-                        @endphp
-                        @foreach ($word->examples as $examples)
-                    <b>{{ $i2 . '- ' . $examples->sentence  }}</b> <br>
-                        @php
-                            $i2++;
-                        @endphp
-                        @endforeach
-                    </td>
-                    <td>
-                        <form action="" method="POST">
-                            @csrf @method('DELETE')
-                            <button class="btn btn-danger">Delete</button>
-                        </form>
-                    </td>
+                    <tr>
+                        <td>{{ $i }}</td>
+                        <td><b>{{ $word->word }}</b></td>
+                        <td><b>{{ $word->meaning_arabic }}</b></td>
+                        <td>
+                            @php
+                                $i2 = 1;
+                            @endphp
+                            @foreach ($word->examples as $example)
+                                <b>{{ $i2 . '- ' . $example->sentence }}</b><br>
+                                @php
+                                    $i2++;
+                                @endphp
+                            @endforeach
+                        </td>
+                        <td>
+                            <form action="{{route('word.destroy',$word->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this word?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
                     @php
                         $i++;
                     @endphp
                 @endforeach
             </tbody>
         </table>
+
     </div>
     <script>
         function toggleMode() {

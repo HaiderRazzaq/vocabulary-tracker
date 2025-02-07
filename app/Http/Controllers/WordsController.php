@@ -1,8 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
+use App\Http\Requests\WordRequestStore;
+use App\Models\Example;
 use App\Models\Words;
+use Doctrine\Inflector\Rules\Word;
 use Illuminate\Http\Request;
 
 class WordsController extends Controller
@@ -13,7 +15,7 @@ class WordsController extends Controller
     public function index()
     {
         $words = Words::with('examples')->get();
-        return view('english.home',compact('words'));
+        return view('english.home', compact('words'));
     }
 
     /**
@@ -27,9 +29,20 @@ class WordsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(WordRequestStore $request)
     {
-        return $request->all();
+        $word = Words::create([
+            'word'    => $request->word,
+            'meaning_arabic' => $request->arabic,
+        ]);
+        foreach ($request->example as $sentence) {
+            Example::create([
+                'sentence' => $sentence,
+                'word_id' => $word->id,
+            ]);
+        }
+        return redirect()->back()->with('success', 'word created successfully');
+
     }
 
     /**
@@ -59,8 +72,10 @@ class WordsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Words $words)
+    public function destroy( $id)
     {
-        //
+        $word=Words::findOrFail($id);
+        $word->delete();
+        return redirect()->back()->with('success', 'word deleted successfully');
     }
 }
