@@ -54,12 +54,12 @@
                 <div class="mb-3 d-flex gap-2">
                     <div>
                         <label for="word1" class="form-label">New Word</label>
-                        <input type="text" id="word1" name="word" class="form-control"
+                        <input type="text" value="{{old('word')}}" id="word1" name="word" class="form-control"
                             placeholder="Enter new word In English" required>
                     </div>
                     <div>
                         <label for="arabic" class="form-label">Meaning in Arabic</label>
-                        <input type="text" id="arabic" name="arabic" class="form-control"
+                        <input type="text" value="{{old('arabic')}}" id="arabic" name="arabic" class="form-control"
                             placeholder="Enter meaning in Arabic" required>
                     </div>
                 </div>
