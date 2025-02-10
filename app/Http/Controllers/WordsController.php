@@ -14,7 +14,7 @@ class WordsController extends Controller
      */
     public function index()
     {
-        $words = Words::with('examples')->get();
+        $words = Words::with('examples')->latest()->get();
         return view('english.home', compact('words'));
     }
 
