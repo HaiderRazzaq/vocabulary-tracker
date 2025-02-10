@@ -76,6 +76,6 @@ class WordsController extends Controller
     {
         $word=Words::findOrFail($id);
         $word->delete();
-        return redirect()->back()->with('success', 'word deleted successfully');
+        return redirect()->back()->with('deleted', 'Word deleted successfully');
     }
 }

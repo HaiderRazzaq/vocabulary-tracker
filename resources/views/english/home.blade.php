@@ -48,6 +48,9 @@
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
+        @if (session('deleted'))
+        <div class="alert alert-danger">{{ session('deleted') }}</div>
+    @endif
         <div class="card p-4">
             <form method="POST" action="{{ route('word.store') }}">
                 @csrf
