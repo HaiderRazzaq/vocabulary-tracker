@@ -105,10 +105,11 @@
                             @endforeach
                         </td>
                         <td>
-                            <form action="{{route('word.destroy',$word->id)}}" method="POST">
+                            <form action="{{ route('word.destroy', $word->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this word?')">Delete</button>
+                                <button class="btn btn-danger"
+                                    onclick="return confirm('Are you sure you want to delete this word?')">Delete</button>
                             </form>
                         </td>
                     </tr>
@@ -121,8 +122,21 @@
 
     </div>
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Check local storage for dark mode preference
+            if (localStorage.getItem("darkMode") === "enabled") {
+                document.body.classList.add("dark-mode");
+            }
+        });
+
         function toggleMode() {
             document.body.classList.toggle("dark-mode");
+
+            if (document.body.classList.contains("dark-mode")) {
+                localStorage.setItem("darkMode", "enabled");
+            } else {
+                localStorage.setItem("darkMode", "disabled");
+            }
         }
 
         function addExample() {
@@ -143,6 +157,7 @@
             button.closest("tr").remove();
         }
     </script>
+
 </body>
 
 </html>
