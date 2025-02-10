@@ -18,11 +18,12 @@
 
         .dark-mode .card,
         .dark-mode .form-control,
-        .dark-mode .table {
-            background-color: #1e1e1e;
-            color: #ffffff;
-            border-color: #444;
+        .dark-mode table {
+            background-color: #333;
+            color: white;
+            border-color: white;
         }
+
 
         .dark-mode .form-control::placeholder {
             color: #bbb;
@@ -122,39 +123,33 @@
 
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            if (localStorage.getItem("darkMode") === "enabled") {
-                document.body.classList.add("dark-mode");
-            }
-        });
-
         function toggleMode() {
             document.body.classList.toggle("dark-mode");
 
+            let table = document.querySelector("table");
+
             if (document.body.classList.contains("dark-mode")) {
                 localStorage.setItem("darkMode", "enabled");
+                if (table) {
+                    table.classList.add("table-dark");
+                }
             } else {
                 localStorage.setItem("darkMode", "disabled");
+                if (table) {
+                    table.classList.remove("table-dark");
+                }
             }
         }
 
-        function addExample() {
-            let container = document.getElementById("examples-container");
-            let div = document.createElement("div");
-            div.classList.add("mb-3", "example-group", "d-flex", "align-items-center");
-            div.innerHTML =
-                '<input type="text" name="example[]" class="form-control me-2" placeholder="Enter another example sentence" required>' +
-                '<button type="button" class="btn btn-danger" onclick="removeExample(this)">✖</button>';
-            container.appendChild(div);
-        }
-
-        function removeExample(button) {
-            button.parentElement.remove();
-        }
-
-        function removeWord(button) {
-            button.closest("tr").remove();
-        }
+        document.addEventListener("DOMContentLoaded", function() {
+            if (localStorage.getItem("darkMode") === "enabled") {
+                document.body.classList.add("dark-mode");
+                let table = document.querySelector("table");
+                if (table) {
+                    table.classList.add("table-dark");
+                }
+            }
+        });
     </script>
 
 </body>
