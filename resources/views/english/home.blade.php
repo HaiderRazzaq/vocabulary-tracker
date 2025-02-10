@@ -123,7 +123,6 @@
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Check local storage for dark mode preference
             if (localStorage.getItem("darkMode") === "enabled") {
                 document.body.classList.add("dark-mode");
             }
