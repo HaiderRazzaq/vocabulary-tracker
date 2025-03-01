@@ -49,8 +49,8 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
         @if (session('deleted'))
-        <div class="alert alert-danger">{{ session('deleted') }}</div>
-    @endif
+            <div class="alert alert-danger">{{ session('deleted') }}</div>
+        @endif
         <div class="card p-4">
             <form method="POST" action="{{ route('word.store') }}">
                 @csrf
@@ -142,6 +142,20 @@
                     table.classList.remove("table-dark");
                 }
             }
+        }
+
+        function addExample() {
+            let container = document.getElementById("examples-container");
+            let div = document.createElement("div");
+            div.classList.add("mb-3", "example-group", "d-flex", "align-items-center");
+            div.innerHTML =
+                '<input type="text" name="example[]" class="form-control me-2" placeholder="Enter another example sentence" required>' +
+                '<button type="button" class="btn btn-danger" onclick="removeExample(this)">✖</button>';
+            container.appendChild(div);
+        }
+
+        function removeExample(button) {
+            button.parentElement.remove();
         }
 
         document.addEventListener("DOMContentLoaded", function() {
